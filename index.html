@@ -341,6 +341,11 @@ $('addTask').onclick=add;$('taskInput').onkeydown=e=>{if(e.key==='Enter')add()};
 </script>
 <style>
   .pet-panel .rename{z-index:20!important;pointer-events:auto!important}
+  .pet-name-editor{position:absolute;left:12px;top:7px;z-index:24;display:flex;align-items:center;gap:4px;max-width:190px}
+  .pet-name-editor input{width:118px;min-width:0;border:1px solid rgba(102,127,184,.38);border-radius:9px;padding:4px 7px;background:rgba(250,252,255,.92);color:#1f2d47;font-family:var(--font-display),serif;font-size:20px;font-weight:700;line-height:1.15;outline:none;box-shadow:0 0 0 3px rgba(107,132,191,.09)}
+  .pet-name-editor button{display:grid;place-items:center;width:25px;height:25px;padding:0;border:0;border-radius:8px;font-size:14px;font-weight:800;cursor:pointer}
+  .pet-name-accept{background:#dcefe4;color:#3f775d}.pet-name-cancel{background:#f3e4e7;color:#a35464}
+  .pet-panel.is-renaming .rename,.pet-panel.is-renaming #petName{visibility:hidden}
   .learning-empty{white-space:nowrap!important}
   .weekly-day.is-current-day{background:linear-gradient(145deg,rgba(239,247,241,.72),rgba(229,242,234,.65))!important;border-color:rgba(135,171,146,.2)!important;box-shadow:inset 0 0 0 1px rgba(137,174,149,.07)}
   .weekly-day.is-current-day:hover{background:linear-gradient(145deg,rgba(241,249,243,.8),rgba(232,245,237,.72))!important}
@@ -349,7 +354,7 @@ $('addTask').onclick=add;$('taskInput').onkeydown=e=>{if(e.key==='Enter')add()};
   @media(max-width:720px){.week-slot-actions{flex-wrap:wrap}.schedule-apply-scope{order:3;width:100%;margin-left:0}}
 </style>
 <script>
-(()=>{const button=document.getElementById('rename');if(!button)return;['pointerdown','pointerup','mousedown','mouseup'].forEach(type=>button.addEventListener(type,event=>event.stopPropagation()));button.addEventListener('click',event=>event.stopPropagation())})();
+(()=>{const button=document.getElementById('rename'),panel=button?.closest('.pet-panel'),name=document.getElementById('petName'),KEY='blue-nook-html:v1';if(!button||!panel||!name)return;['pointerdown','pointerup','mousedown','mouseup'].forEach(type=>button.addEventListener(type,event=>event.stopPropagation()));button.addEventListener('click',event=>event.stopPropagation());button.onclick=event=>{event.preventDefault();event.stopPropagation();if(panel.querySelector('.pet-name-editor'))return;panel.classList.add('is-renaming');const editor=document.createElement('div');editor.className='pet-name-editor';editor.innerHTML='<input maxlength="30" aria-label="Новое имя кота"><button type="button" class="pet-name-accept" title="Сохранить">✓</button><button type="button" class="pet-name-cancel" title="Отмена">×</button>';panel.append(editor);const input=editor.querySelector('input'),accept=editor.querySelector('.pet-name-accept'),cancel=editor.querySelector('.pet-name-cancel');input.value=name.textContent.trim();input.select();const close=()=>{editor.remove();panel.classList.remove('is-renaming')},save=()=>{const value=input.value.trim();if(!value){input.focus();return}let data={};try{data=JSON.parse(localStorage.getItem(KEY)||'{}')}catch{}data.name=value;localStorage.setItem(KEY,JSON.stringify(data));name.textContent=value;close()};editor.addEventListener('pointerdown',event=>event.stopPropagation());editor.addEventListener('click',event=>event.stopPropagation());accept.onclick=save;cancel.onclick=close;input.onkeydown=event=>{if(event.key==='Enter')save();if(event.key==='Escape')close()}}})();
 </script>
 <script>
 (()=>{
