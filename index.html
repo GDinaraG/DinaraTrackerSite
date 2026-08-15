@@ -346,6 +346,7 @@ $('addTask').onclick=add;$('taskInput').onkeydown=e=>{if(e.key==='Enter')add()};
   .learning-card{padding:9px!important;min-height:106px!important}.learning-card small{font-size:9px!important}.learning-card strong{margin:4px 0 2px!important;font-size:16px!important}.learning-card p{height:23px!important;font-size:11px!important}.learning-percent{font-size:9px!important}
   .learning-modal{padding:18px!important}.learning-modal h3{font-size:27px!important}.learning-modal>p{font-size:13px!important;line-height:1.4}.learning-form{gap:8px!important;margin-top:11px!important}.learning-form label,.book-progress-editor label{font-size:11px!important}.learning-form input,.learning-form select,.lesson-add input,.book-progress-editor input{font-size:14px!important}.lesson-add{margin:11px 0 7px!important}.lesson-row{padding:7px 9px!important}.lesson-row span{font-size:13px!important}
   .fireworks-show{animation:none!important;background:radial-gradient(circle at center,rgba(225,237,255,.11),transparent 62%)!important}.fireworks-show canvas{position:absolute;inset:0;width:100%;height:100%}.fireworks-show .celebration-message{animation:celebrationMessage 4.6s cubic-bezier(.2,.8,.2,1) forwards}
+  .celebration-message small{display:block;margin-top:7px;color:#7b87a0;font-size:10px;font-weight:600}
   .todo-panel .task{padding-top:7px!important;padding-bottom:7px!important}.todo-panel .task-main p{font-size:14px!important;line-height:1.3!important}.today-task-row{min-height:29px!important}.today-brief .today-task-row>.today-task-text{font-size:14px!important;line-height:1.3!important}
   .weekly-schedule-head h2{font-size:21px!important}.weekly-days{gap:5px!important;margin-top:3px!important}.weekly-day{padding:6px 6px!important}.weekly-day-name{padding-bottom:5px!important}.weekly-day-name b{font-size:11px!important}.weekly-day-name span{font-size:10px!important}.weekly-slot{grid-template-columns:34px minmax(0,1fr)!important;font-size:9px!important}.weekly-slot-child{padding:2px 4px!important;font-size:9px!important}
   .pet-panel .rename{z-index:20!important;pointer-events:auto!important}
@@ -361,6 +362,40 @@ $('addTask').onclick=add;$('taskInput').onkeydown=e=>{if(e.key==='Enter')add()};
   .schedule-apply-scope select{border:1px solid #d3ddea;border-radius:9px;padding:8px 9px;background:#fff;color:#3d4d69;font-size:11px;cursor:pointer}
   @media(max-width:720px){.week-slot-actions{flex-wrap:wrap}.schedule-apply-scope{order:3;width:100%;margin-left:0}}
 </style>
+<script>
+(()=>{const messages=[
+['Ты это сделала!','Вот оно — то самое приятное «я смогла».'],
+['Ура, финиш!','Можно честно собой погордиться.'],
+['Получилось!','Ты дошла до конца — это правда круто.'],
+['Вот это да!','Столько маленьких шагов сложились в большой результат.'],
+['Финиш взят!','Ты не бросила себя на полпути.'],
+['Есть!','Ещё одна важная вещь теперь позади.'],
+['Ты справилась!','И справилась по-настоящему, до самой последней точки.'],
+['Какая ты молодец!','Пусть этот момент немножко побудет праздником.'],
+['Готово и красиво!','Можно выдохнуть и довольно потянуться, как кот.'],
+['Миссия выполнена!','Без плаща супергероя, но вполне героически.'],
+['Это победа!','Не громкая для всех — зато очень твоя.'],
+['Дошла!','Даже если иногда хотелось свернуть куда-нибудь к пледу.'],
+['Финальная галочка!','Она особенно приятная — заслуженно.'],
+['Ты смогла!','Сохрани это чувство: оно твоё.'],
+['Ещё одна вершина!','Можно немного постоять наверху и полюбоваться.'],
+['Как здорово!','Ты дала себе обещание и сдержала его.'],
+['Закончено!','Мозг доволен, кот впечатлён, салют разрешён.'],
+['Большой мур!','Это было достойно отдельного кошачьего праздника.'],
+['Победное мяу!','Кот официально подтверждает: ты умница.'],
+['Вот и всё!','В хорошем смысле: дело завершено, ты свободна.'],
+['Прекрасная работа!','Твоё терпение принесло настоящий результат.'],
+['Сделано!','Не идеально когда-нибудь, а реально сейчас.'],
+['Ты дошла до конца!','И это важнее любой скорости.'],
+['Можно праздновать!','Хотя бы улыбкой, чаем и довольным «да!».'],
+['Какой хороший финал!','Ты вложила время — и оно не пропало зря.'],
+['Заслуженный салют!','Потому что такие вещи сами себя не заканчивают.'],
+['Ещё одно «могу»!','Положи его в свою внутреннюю копилку.'],
+['Финишная ленточка твоя!','Можно больше никуда не бежать хотя бы минутку.'],
+['Горжусь тобой!','Ты сделала для себя что-то действительно хорошее.'],
+['Ну всё, чемпионка!','Теперь можно торжественно ничего не делать пять минут.']
+];let last=-1;const decorate=()=>document.querySelectorAll('.celebration-message:not([data-praised])').forEach(box=>{box.dataset.praised='true';let index=Math.floor(Math.random()*messages.length);if(index===last)index=(index+1)%messages.length;last=index;const project=box.querySelector('span')?.textContent||'',copy=messages[index];box.querySelector('b').textContent=copy[0];box.querySelector('span').textContent=copy[1];const label=document.createElement('small');label.textContent=project;box.append(label)});new MutationObserver(decorate).observe(document.body,{childList:true,subtree:true});decorate()})();
+</script>
 <script>
 (()=>{const prepared=new WeakSet(),prepare=overlay=>{if(prepared.has(overlay))return;prepared.add(overlay);let pressedOnBackdrop=false;overlay.addEventListener('pointerdown',event=>{pressedOnBackdrop=event.target===overlay},true);overlay.addEventListener('click',event=>{if(event.target===overlay&&!pressedOnBackdrop){event.preventDefault();event.stopImmediatePropagation()}pressedOnBackdrop=false},true);overlay.addEventListener('pointercancel',()=>{pressedOnBackdrop=false},true)};const scan=()=>document.querySelectorAll('.learning-overlay').forEach(prepare);scan();new MutationObserver(scan).observe(document.body,{childList:true,subtree:true})})();
 </script>
