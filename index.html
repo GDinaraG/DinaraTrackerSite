@@ -340,6 +340,13 @@ $('addTask').onclick=add;$('taskInput').onkeydown=e=>{if(e.key==='Enter')add()};
 })();
 </script>
 <style>
+  /* Более крупный полезный текст без увеличения карточек */
+  .learning-tracker{padding:10px 13px!important}
+  .learning-head{margin-bottom:6px!important}.learning-head b{font-size:20px!important}.learning-head span{font-size:10px!important}
+  .learning-card{padding:9px!important;min-height:106px!important}.learning-card small{font-size:9px!important}.learning-card strong{margin:4px 0 2px!important;font-size:16px!important}.learning-card p{height:23px!important;font-size:11px!important}.learning-percent{font-size:9px!important}
+  .learning-modal{padding:18px!important}.learning-modal h3{font-size:27px!important}.learning-modal>p{font-size:13px!important;line-height:1.4}.learning-form{gap:8px!important;margin-top:11px!important}.learning-form label,.book-progress-editor label{font-size:11px!important}.learning-form input,.learning-form select,.lesson-add input,.book-progress-editor input{font-size:14px!important}.lesson-add{margin:11px 0 7px!important}.lesson-row{padding:7px 9px!important}.lesson-row span{font-size:13px!important}
+  .todo-panel .task{padding-top:7px!important;padding-bottom:7px!important}.todo-panel .task-main p{font-size:14px!important;line-height:1.3!important}.today-task-row{min-height:29px!important}.today-brief .today-task-row>.today-task-text{font-size:14px!important;line-height:1.3!important}
+  .weekly-schedule-head h2{font-size:21px!important}.weekly-days{gap:5px!important;margin-top:3px!important}.weekly-day{padding:6px 6px!important}.weekly-day-name{padding-bottom:5px!important}.weekly-day-name b{font-size:11px!important}.weekly-day-name span{font-size:10px!important}.weekly-slot{grid-template-columns:34px minmax(0,1fr)!important;font-size:9px!important}.weekly-slot-child{padding:2px 4px!important;font-size:9px!important}
   .pet-panel .rename{z-index:20!important;pointer-events:auto!important}
   .pet-name-editor{position:absolute;left:12px;top:7px;z-index:24;display:flex;align-items:center;gap:4px;max-width:190px}
   .pet-name-editor input{width:118px;min-width:0;border:1px solid rgba(102,127,184,.38);border-radius:9px;padding:4px 7px;background:rgba(250,252,255,.92);color:#1f2d47;font-family:var(--font-display),serif;font-size:20px;font-weight:700;line-height:1.15;outline:none;box-shadow:0 0 0 3px rgba(107,132,191,.09)}
